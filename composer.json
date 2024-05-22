@@ -7,7 +7,9 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.0",
-        "laravel/tinker": "^2.9"
+        "laravel/sanctum": "^4.0",
+        "laravel/tinker": "^2.9",
+        "rahat1994/sparkcommerce-rest-routes": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -61,6 +63,12 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "repositories": {
+        "sparkcommerce-rest-routes": {
+            "type": "path",
+            "url": "./packages/sparkcommerce-rest-routes"
+        }
+    },
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
