@@ -6,10 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "filament/filament": "^3.2",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "rahat1994/sparkcommerce-rest-routes": "*"
+        "rahat1994/sparkcommerce-rest-routes": "*",
+        "rahat1994/sparkcommerce": "*",
+        "rahat1994/sparkcommerce-multivendor": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -35,7 +38,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -67,6 +71,14 @@
         "sparkcommerce-rest-routes": {
             "type": "path",
             "url": "./packages/sparkcommerce-rest-routes"
+        },
+        "sparkcommerce": {
+            "type": "path",
+            "url": "./packages/sparkcommerce"
+        },
+        "sparkcommerce-multivendor": {
+            "type": "path",
+            "url": "./packages/sparkcommerce-multivendor"
         }
     },
     "minimum-stability": "dev",
