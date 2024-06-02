@@ -17,6 +17,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Rahat1994\SparkcommerceMultivendor\Enums\PanelType;
+use Rahat1994\SparkcommerceMultivendor\SparkcommerceMultivendorPlugin;
 
 class BackofficePanelProvider extends PanelProvider
 {
@@ -29,6 +31,9 @@ class BackofficePanelProvider extends PanelProvider
             ->login()
             ->colors([
                 'primary' => Color::Amber,
+            ])
+            ->plugins([
+                SparkcommerceMultivendorPlugin::make(PanelType::Admin),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
