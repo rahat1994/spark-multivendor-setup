@@ -17,6 +17,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Rahat1994\SparkCommerce\SparkCommercePlugin;
+use Rahat1994\SparkcommerceMultivendor\Enums\PanelType;
+use Rahat1994\SparkcommerceMultivendor\SparkcommerceMultivendorPlugin;
 
 class VendorPanelProvider extends PanelProvider
 {
@@ -28,6 +31,11 @@ class VendorPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->plugins([
+                SparkCommercePlugin::make(),
+                SparkcommerceMultivendorPlugin::make(PanelType::Vendor),
+            ])
+            ->login()
             ->discoverResources(in: app_path('Filament/Vendor/Resources'), for: 'App\\Filament\\Vendor\\Resources')
             ->discoverPages(in: app_path('Filament/Vendor/Pages'), for: 'App\\Filament\\Vendor\\Pages')
             ->pages([
