@@ -3,16 +3,31 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasTenants;
+use Filament\Panel;
+use Illuminate\Auth\Passwords\CanResetPassword as PasswordsCanResetPassword;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Contracts\Auth\CanResetPassword;
+use Rahat1994\SparkcommerceMultivendor\Models\SCMVVendor;
+use Rahat1994\SparkcommerceMultivendor\Traits\HasVendors;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements CanResetPassword
+class User extends Authenticatable implements FilamentUser, HasTenants, CanResetPassword
 {
-    use HasRoles, HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens,
+        HasFactory,
+        Notifiable,
+        HasVendors,
+        HasRoles,
+        PasswordsCanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -46,5 +61,25 @@ class User extends Authenticatable implements CanResetPassword
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+    }
+
+    public function vendors(): BelongsToMany
+    {
+        return $this->belongsToMany(SCMVVendor::class, 'sc_mv_user_vendor', 'user_id', 'vendor_id');
+    }
+
+    public function getTenants(Panel $panel): Collection
+    {
+        return $this->vendors;
+    }
+
+    public function canAccessTenant(Model $tenant): bool
+    {
+        return $this->vendors()->whereKey($tenant)->exists();
     }
 }
