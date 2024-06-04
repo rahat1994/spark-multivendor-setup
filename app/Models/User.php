@@ -25,9 +25,9 @@ class User extends Authenticatable implements FilamentUser, HasTenants, CanReset
     use HasApiTokens,
         HasFactory,
         Notifiable,
-        HasVendors,
         HasRoles,
-        PasswordsCanResetPassword;
+        PasswordsCanResetPassword,
+        HasVendors;
 
     /**
      * The attributes that are mass assignable.
@@ -63,23 +63,10 @@ class User extends Authenticatable implements FilamentUser, HasTenants, CanReset
         ];
     }
 
+    
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
     }
 
-    public function vendors(): BelongsToMany
-    {
-        return $this->belongsToMany(SCMVVendor::class, 'sc_mv_user_vendor', 'user_id', 'vendor_id');
-    }
-
-    public function getTenants(Panel $panel): Collection
-    {
-        return $this->vendors;
-    }
-
-    public function canAccessTenant(Model $tenant): bool
-    {
-        return $this->vendors()->whereKey($tenant)->exists();
-    }
 }
