@@ -17,6 +17,8 @@ return new class extends Migration
     public function down()
     {
         $productsTable = strval(config("sparkcommerce.table_prefix")).strval(config("sparkcommerce.products_table_name"));
-        Schema::dropIfExists(strval($productsTable));
+        Schema::table( $productsTable, function (Blueprint $table) {
+            $table->dropColumn('vendor_id');
+        });
     }
 };
