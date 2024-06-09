@@ -11,9 +11,9 @@ return new class extends Migration
         Schema::create(strval(config("sparkcommerce-multivendor.table_prefix")) . 'shop_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug');
-            $table->longText('description');
-            $table->integer('order');
+            $table->string('slug')->nullable();
+            $table->longText('description')->nullable();
+            $table->integer('order')->nullable();
             $table->json('meta')->nullable();
             $table->timestamps();
         });
