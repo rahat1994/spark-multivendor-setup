@@ -7,3 +7,6 @@
 [submodule "packages/sparkcommerce-multivendor"]
 	path = packages/sparkcommerce-multivendor
 	url = git@github.com:rahat1994/sparkcommerce-multivendor.git
+[submodule "packages/sparkcommerce-multivendor-rest-routes"]
+	path = packages/sparkcommerce-multivendor-rest-routes
+	url = git@github.com:rahat1994/sparkcommerce-multivendor-rest-routes.git
