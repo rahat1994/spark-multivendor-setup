@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.9",
         "rahat1994/sparkcommerce": "*",
         "rahat1994/sparkcommerce-rest-routes": "*",
-        "rahat1994/sparkcommerce-multivendor": "*"
+        "rahat1994/sparkcommerce-multivendor": "*",
+        "rahat1994/sparkcommerce-multivendor-rest-routes": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -78,6 +79,10 @@
         "sparkcommerce-multivendor": {
             "type": "path",
             "url": "./packages/sparkcommerce-multivendor"
+        },
+        "sparkcommerce-multivendor-rest-routes": {
+            "type": "path",
+            "url": "./packages/sparkcommerce-multivendor-rest-routes"
         },
         "sparkcommerce-rest-routes": {
             "type": "path",
