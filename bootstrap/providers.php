@@ -4,4 +4,5 @@ return [
     App\Providers\AppServiceProvider::class,
     App\Providers\Filament\BackofficePanelProvider::class,
     App\Providers\Filament\VendorPanelProvider::class,
+    App\Providers\WholesaverVendorServiceProvider::class,
 ];
