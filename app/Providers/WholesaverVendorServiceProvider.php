@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Filament\Tables\Actions\Action;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Support\ServiceProvider;
 
 use Filament\Forms\Components\Select;
@@ -57,10 +58,30 @@ class WholesaverVendorServiceProvider extends ServiceProvider
                         ->required()
                         ->email()
                         ->placeholder('johndoe@example.com'),
+                    Select::make('delivery_date')
+                        ->label('Delivery Date')
+                        ->multiple()
+                        ->options([
+                            'Saturday',
+                            'Sunday',
+                            'Monday',
+                            'Tuesday',
+                            'Wednesday',
+                            'Thursday',
+                            'Friday',
+                        ]),
                     TagsInput::make('postcodes')
                         ->label('Postcodes')
                         ->required()
                         ->placeholder('Postcodes where the vendor delivers'),
+                    FileUpload::make('logo')
+                        ->label('Logo')
+                        ->required()
+                        ->placeholder('Upload a logo for the vendor'),
+                    FileUpload::make('background_image')
+                        ->label('Background Image')
+                        ->required()
+                        ->placeholder('Upload a background image for the vendor'),
                 ]);
         });
 
