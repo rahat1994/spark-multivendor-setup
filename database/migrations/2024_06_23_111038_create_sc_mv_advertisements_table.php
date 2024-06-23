@@ -14,6 +14,8 @@ return new class extends Migration
             $table->string('url');
             $table->integer('impressions')->default(0);
             $table->integer('clicks')->default(0);
+            $table->string('status')->default('active');
+            $table->string('position')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->json('meta')->nullable();
             $table->timestamps();
