@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
 
-        $categoriesTable = strval(config("sparkcommerce.table_prefix")).strval(config("sparkcommerce.product_categories_table_name"));
+        $categoriesTable = strval(config("sparkcommerce.table_prefix")).strval(config("sparkcommerce.categories_table_name"));
         Schema::table( $categoriesTable, function (Blueprint $table) {
             $table->unsignedBigInteger('vendor_id');
         });
@@ -17,7 +17,7 @@ return new class extends Migration
 
     public function down()
     {
-        $categoriesTable = strval(config("sparkcommerce.table_prefix")).strval(config("sparkcommerce.product_categories_table_name"));
+        $categoriesTable = strval(config("sparkcommerce.table_prefix")).strval(config("sparkcommerce.categories_table_name"));
         Schema::table( $categoriesTable, function (Blueprint $table) {
             $table->dropColumn('vendor_id');
         });

@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create(strval(config("sparkcommerce.table_prefix")).strval(config("sparkcommerce.product_categories_table_name")), function (Blueprint $table) {
+        Schema::create(strval(config("sparkcommerce.table_prefix")) . strval(config("sparkcommerce.categories_table_name")), function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('parent_id')->nullable();
@@ -17,7 +17,8 @@ return new class extends Migration
         });
     }
 
-    public function down(){
-        Schema::dropIfExists(strval(config("sparkcommerce.table_prefix")). strval(config("sparkcommerce.product_categories_table_name")));
+    public function down()
+    {
+        Schema::dropIfExists(strval(config("sparkcommerce.table_prefix")) . strval(config("sparkcommerce.categories_table_name")));
     }
 };
