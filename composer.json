@@ -13,6 +13,7 @@
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "binafy/laravel-cart": "^1.0",
         "rahat1994/sparkcommerce": "*",
         "rahat1994/sparkcommerce-rest-routes": "*",
         "rahat1994/sparkcommerce-multivendor": "*",
