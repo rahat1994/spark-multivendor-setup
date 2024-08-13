@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        $productsTable = strval(config("sparkcommerce.table_prefix")).strval(config("sparkcommerce.products_table_name"));
+        $productsTable = strval(config("sparkcommerce.table_prefix")) . strval(config("sparkcommerce.products_table_name"));
 
         Schema::create($productsTable, function (Blueprint $table) {
             $table->id();
@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('product_type'); // product type ["Simple", "Variable"]
             $table->string('slug');
-            $table->decimal('price', 8, 2)->nullable(); // price can be null for variable products
+            $table->decimal('regular_price', 8, 2)->nullable(); // price can be null for variable products
+            $table->decimal('sale_price', 8, 2)->nullable();
             $table->string('sku')->nullable();
             $table->decimal('stock_quantity', 8, 2)->nullable();
             $table->boolean('manage_product_stock')->default(0);
@@ -32,7 +33,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create(strval(config("sparkcommerce.table_prefix")).strval(config("sparkcommerce.product_variants_table_name")), function (Blueprint $table) use ($productsTable) {
+        Schema::create(strval(config("sparkcommerce.table_prefix")) . strval(config("sparkcommerce.product_variants_table_name")), function (Blueprint $table) use ($productsTable) {
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->string('sku')->nullable();
@@ -51,9 +52,10 @@ return new class extends Migration
         });
     }
 
-    public function down(){
+    public function down()
+    {
 
-        Schema::dropIfExists(strval(config("sparkcommerce.table_prefix")).strval(config("sparkcommerce.product_variants_table_name")));
-        Schema::dropIfExists(strval(config("sparkcommerce.table_prefix")).strval(config("sparkcommerce.products_table_name")));
+        Schema::dropIfExists(strval(config("sparkcommerce.table_prefix")) . strval(config("sparkcommerce.product_variants_table_name")));
+        Schema::dropIfExists(strval(config("sparkcommerce.table_prefix")) . strval(config("sparkcommerce.products_table_name")));
     }
 };
