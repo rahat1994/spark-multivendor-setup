@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Rahat1994\SparkCommerce\SparkCommercePlugin;
 use Rahat1994\SparkcommerceMultivendor\Enums\PanelType;
+use Rahat1994\SparkcommerceMultivendor\Filament\Pages\Tenancy\EditVendorProfile;
 use Rahat1994\SparkcommerceMultivendor\SparkcommerceMultivendorPlugin;
 
 class VendorPanelProvider extends PanelProvider
@@ -60,6 +61,8 @@ class VendorPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])->tenantProfile(
+                EditVendorProfile::class
+            );
     }
 }

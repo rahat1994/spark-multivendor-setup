@@ -11,8 +11,10 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 
+use Rahat1994\SparkcommerceMultivendor\Filament\Pages\Tenancy\EditVendorProfile;
 use Rahat1994\SparkcommerceMultivendor\Filament\Pages\Tenancy\RegisterVendor;
 use Filament\Forms\Form;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Tables\Actions\EditAction as ActionsEditAction;
 use Rahat1994\SparkcommerceMultivendor\Filament\Resources\VendorRequestResource;
 use Rahat1994\SparkcommerceMultivendor\Filament\Resources\VendorResource;
@@ -61,6 +63,7 @@ class WholesaverVendorServiceProvider extends ServiceProvider
                     Select::make('delivery_date')
                         ->label('Delivery Date')
                         ->multiple()
+
                         ->options([
                             'Saturday',
                             'Sunday',
@@ -74,27 +77,83 @@ class WholesaverVendorServiceProvider extends ServiceProvider
                         ->label('Postcodes')
                         ->required()
                         ->placeholder('Postcodes where the vendor delivers'),
-                    FileUpload::make('logo')
+                    SpatieMediaLibraryFileUpload::make('logo')
+                        ->collection('Logo')
                         ->label('Logo')
+                        ->previewable()
                         ->required()
+                        ->image()
                         ->placeholder('Upload a logo for the vendor'),
-                    FileUpload::make('background_image')
+                    SpatieMediaLibraryFileUpload::make('background_image')
                         ->label('Background Image')
                         ->required()
+                        ->image()
                         ->placeholder('Upload a background image for the vendor'),
                 ]);
         });
 
-        // vendor resource Top vendor
-        // VendorResource::macro('tableActions', function () {
-        // //     if (get_class() == VendorResource::class) {
+        // register a vendor edit form configuration
+        EditVendorProfile::macro('configureForm', function (Form $form) {
+            // dd($this->tenant);
+            return $form
+            ->schema([
+                TextInput::make('name')
+                    ->label('Vendor Name')
+                    ->required()
+                    ->placeholder('Custom Store Name'),
+                Select::make('category')
+                    ->label('Category')
+                    ->required()
+                    ->options([
+                        'Pultry' => 'Poultry',
+                        'Drinks' => 'Drinks',
+                        'Fish' => 'Fish',
+                    ]),
+                TextInput::make('contanct_number')
+                    ->label('Contact Number')
+                    ->required()
+                    ->placeholder('Phone Number'),
+                TextInput::make('email')
+                    ->label('Email')
+                    ->required()
+                    ->email()
+                    ->placeholder('johndoe@example.com'),
+                Select::make('delivery_date')
+                    ->label('Delivery Date')
+                    ->multiple()
+                    ->options([
+                        'Saturday',
+                        'Sunday',
+                        'Monday',
+                        'Tuesday',
+                        'Wednesday',
+                        'Thursday',
+                        'Friday',
+                    ])->afterStateHydrated(function (Select $component, $state) {
+                        $component->state(['Saturday', 'Sunday']);
+                    }),
+                TagsInput::make('postcodes')
+                    ->label('Postcodes')
+                    ->required()
+                    ->placeholder('Postcodes where the vendor delivers'),
+                // SpatieMediaLibraryFileUpload::make('product_image')
+                //     ->collection('product_image')
+                //     ->hiddenLabel()
+                //     ->image(),
+                SpatieMediaLibraryFileUpload::make('logo')
+                    ->collection('Logo')
+                    ->label('Logo')
+                    ->previewable()
+                    ->required()
+                    ->image()
+                    ->placeholder('Upload a logo for the vendor'),
+                SpatieMediaLibraryFileUpload::make('background_image')
+                    ->label('Background Image')
+                    ->required()
+                    ->image()
+                    ->placeholder('Upload a background image for the vendor'),
+            ]);
 
-
-        // //     }
-        // // });
-
-        // VendorRequestResource::macro('tableActions', function () {
-        //     dd("Hello");
-        // });
+        });
     }
 }
