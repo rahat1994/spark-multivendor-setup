@@ -15,6 +15,7 @@ use Rahat1994\SparkcommerceMultivendor\Filament\Pages\Tenancy\EditVendorProfile;
 use Rahat1994\SparkcommerceMultivendor\Filament\Pages\Tenancy\RegisterVendor;
 use Filament\Forms\Form;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Pages\Auth\Register;
 use Filament\Tables\Actions\EditAction as ActionsEditAction;
 use Rahat1994\SparkcommerceMultivendor\Filament\Resources\VendorRequestResource;
 use Rahat1994\SparkcommerceMultivendor\Filament\Resources\VendorResource;
@@ -25,9 +26,7 @@ class WholesaverVendorServiceProvider extends ServiceProvider
     /**
      * Register services.
      */
-    public function register(): void
-    {
-    }
+    public function register(): void {}
 
     /**
      * Bootstrap services.
@@ -35,7 +34,7 @@ class WholesaverVendorServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // register a vendor form configuration
-        RegisterVendor::macro('configureForm', function (Form $form) {
+        RegisterVendor::macro('configureVendorRegistrationForm', function (Form $form) {
 
             return $form
                 ->schema([
@@ -51,7 +50,11 @@ class WholesaverVendorServiceProvider extends ServiceProvider
                             'Drinks' => 'Drinks',
                             'Fish' => 'Fish',
                         ]),
-                    TextInput::make('contanct_number')
+                    TextInput::make('address')
+                        ->label('Address')
+                        ->required()
+                        ->placeholder('Adress of the vendor'),
+                    TextInput::make('contact_number')
                         ->label('Contact Number')
                         ->required()
                         ->placeholder('Phone Number'),
@@ -60,10 +63,9 @@ class WholesaverVendorServiceProvider extends ServiceProvider
                         ->required()
                         ->email()
                         ->placeholder('johndoe@example.com'),
-                    Select::make('delivery_date')
+                    Select::make('delivery_days')
                         ->label('Delivery Date')
                         ->multiple()
-
                         ->options([
                             'Saturday',
                             'Sunday',
@@ -92,68 +94,90 @@ class WholesaverVendorServiceProvider extends ServiceProvider
                 ]);
         });
 
+        RegisterVendor::macro('saveRegistrationData', function (array $data) {
+
+            // dd($data);
+            $meta = [
+                'delivery_days' => $data['delivery_days'],
+                'postcodes' => $data['postcodes'],
+            ];
+            unset($data['delivery_days']);
+            unset($data['postcodes']);
+
+            $data['meta'] = $meta;
+            $vendor = SCMVVendor::create($data);
+            $vendor->members()->attach(auth()->user());
+            return $vendor;
+        });
+
         // register a vendor edit form configuration
-        EditVendorProfile::macro('configureForm', function (Form $form) {
+        EditVendorProfile::macro('configureVendorProfileEditForm', function (Form $form) {
             // dd($this->tenant);
             return $form
-            ->schema([
-                TextInput::make('name')
-                    ->label('Vendor Name')
-                    ->required()
-                    ->placeholder('Custom Store Name'),
-                Select::make('category')
-                    ->label('Category')
-                    ->required()
-                    ->options([
-                        'Pultry' => 'Poultry',
-                        'Drinks' => 'Drinks',
-                        'Fish' => 'Fish',
-                    ]),
-                TextInput::make('contanct_number')
-                    ->label('Contact Number')
-                    ->required()
-                    ->placeholder('Phone Number'),
-                TextInput::make('email')
-                    ->label('Email')
-                    ->required()
-                    ->email()
-                    ->placeholder('johndoe@example.com'),
-                Select::make('delivery_date')
-                    ->label('Delivery Date')
-                    ->multiple()
-                    ->options([
-                        'Saturday',
-                        'Sunday',
-                        'Monday',
-                        'Tuesday',
-                        'Wednesday',
-                        'Thursday',
-                        'Friday',
-                    ])->afterStateHydrated(function (Select $component, $state) {
-                        $component->state(['Saturday', 'Sunday']);
-                    }),
-                TagsInput::make('postcodes')
-                    ->label('Postcodes')
-                    ->required()
-                    ->placeholder('Postcodes where the vendor delivers'),
-                // SpatieMediaLibraryFileUpload::make('product_image')
-                //     ->collection('product_image')
-                //     ->hiddenLabel()
-                //     ->image(),
-                SpatieMediaLibraryFileUpload::make('logo')
-                    ->collection('Logo')
-                    ->label('Logo')
-                    ->previewable()
-                    ->required()
-                    ->image()
-                    ->placeholder('Upload a logo for the vendor'),
-                SpatieMediaLibraryFileUpload::make('background_image')
-                    ->label('Background Image')
-                    ->required()
-                    ->image()
-                    ->placeholder('Upload a background image for the vendor'),
-            ]);
-
+                ->schema([
+                    TextInput::make('name')
+                        ->label('Vendor Name')
+                        ->required()
+                        ->placeholder('Custom Store Name'),
+                    Select::make('category')
+                        ->label('Category')
+                        ->required()
+                        ->options([
+                            'Pultry' => 'Poultry',
+                            'Drinks' => 'Drinks',
+                            'Fish' => 'Fish',
+                        ]),
+                    TextInput::make('contact_number')
+                        ->label('Contact Number')
+                        ->required()
+                        ->placeholder('Phone Number'),
+                    TextInput::make('email')
+                        ->label('Email')
+                        ->required()
+                        ->email()
+                        ->placeholder('johndoe@example.com'),
+                    Select::make('delivery_days')
+                        ->label('Delivery Days')
+                        ->multiple()
+                        ->options([
+                            'Saturday',
+                            'Sunday',
+                            'Monday',
+                            'Tuesday',
+                            'Wednesday',
+                            'Thursday',
+                            'Friday',
+                        ])->afterStateHydrated(function (Select $component) {
+                            //  = $component->state([2, 4]);
+                            // dd($this->tenant);
+                            $component->state($this->tenant->meta['delivery_days']);
+                        }),
+                    TagsInput::make('postcodes')
+                        ->label('Postcodes')
+                        ->required()
+                        ->placeholder('Postcodes where the vendor delivers')
+                        ->afterStateHydrated(function (TagsInput $component) {
+                            //  = $component->state([2, 4]);
+                            // dd($this->tenant);
+                            $component->state($this->tenant->meta['postcodes']);
+                        }),
+                    // SpatieMediaLibraryFileUpload::make('product_image')
+                    //     ->collection('product_image')
+                    //     ->hiddenLabel()
+                    //     ->image(),
+                    SpatieMediaLibraryFileUpload::make('logo')
+                        ->collection('Logo')
+                        ->label('Logo')
+                        ->previewable()
+                        ->required()
+                        ->image()
+                        ->placeholder('Upload a logo for the vendor'),
+                    SpatieMediaLibraryFileUpload::make('background_image')
+                        ->label('Background Image')
+                        ->required()
+                        ->image()
+                        ->placeholder('Upload a background image for the vendor'),
+                ]);
         });
     }
 }
