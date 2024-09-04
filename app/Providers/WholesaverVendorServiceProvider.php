@@ -140,17 +140,17 @@ class WholesaverVendorServiceProvider extends ServiceProvider
                         ->label('Delivery Days')
                         ->multiple()
                         ->options([
-                            'Saturday',
-                            'Sunday',
-                            'Monday',
-                            'Tuesday',
-                            'Wednesday',
-                            'Thursday',
-                            'Friday',
+                            'Saturday' => 'Saturday',
+                            'Sunday'=>'Sunday',
+                            'Monday'=>'Monday',
+                            'Tuesday'=>'Tuesday',
+                            'Wednesday'=>'Wednesday',
+                            'Thursday'=>'Thursday',
+                            'Friday'=>'Friday',
                         ])->afterStateHydrated(function (Select $component) {
-                            //  = $component->state([2, 4]);
-                            // dd($this->tenant);
-                            $component->state($this->tenant->meta['delivery_days']);
+                            if (isset($this->tenant->meta['delivery_days'])){
+                                $component->state($this->tenant->meta['delivery_days']);
+                            }
                         }),
                     TagsInput::make('postcodes')
                         ->label('Postcodes')
@@ -158,8 +158,10 @@ class WholesaverVendorServiceProvider extends ServiceProvider
                         ->placeholder('Postcodes where the vendor delivers')
                         ->afterStateHydrated(function (TagsInput $component) {
                             //  = $component->state([2, 4]);
-                            // dd($this->tenant);
-                            $component->state($this->tenant->meta['postcodes']);
+                            $this->tenant;
+                            if(isset($this->tenant->meta['postcodes'])){
+                                $component->state($this->tenant->meta['postcodes']);
+                            }                            
                         }),
                     // SpatieMediaLibraryFileUpload::make('product_image')
                     //     ->collection('product_image')
