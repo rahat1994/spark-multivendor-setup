@@ -20,7 +20,7 @@ use Filament\Tables\Actions\EditAction as ActionsEditAction;
 use Rahat1994\SparkcommerceMultivendor\Filament\Resources\VendorRequestResource;
 use Rahat1994\SparkcommerceMultivendor\Filament\Resources\VendorResource;
 use Rahat1994\SparkcommerceMultivendor\Models\SCMVVendor;
-
+use Illuminate\Database\Eloquent\Model;
 class WholesaverVendorServiceProvider extends ServiceProvider
 {
     /**
@@ -147,26 +147,12 @@ class WholesaverVendorServiceProvider extends ServiceProvider
                             'Wednesday'=>'Wednesday',
                             'Thursday'=>'Thursday',
                             'Friday'=>'Friday',
-                        ])->afterStateHydrated(function (Select $component) {
-                            if (isset($this->tenant->meta['delivery_days'])){
-                                $component->state($this->tenant->meta['delivery_days']);
-                            }
-                        }),
+                        ]),
                     TagsInput::make('postcodes')
                         ->label('Postcodes')
                         ->required()
                         ->placeholder('Postcodes where the vendor delivers')
-                        ->afterStateHydrated(function (TagsInput $component) {
-                            //  = $component->state([2, 4]);
-                            $this->tenant;
-                            if(isset($this->tenant->meta['postcodes'])){
-                                $component->state($this->tenant->meta['postcodes']);
-                            }                            
-                        }),
-                    // SpatieMediaLibraryFileUpload::make('product_image')
-                    //     ->collection('product_image')
-                    //     ->hiddenLabel()
-                    //     ->image(),
+                        ->default([31000, 2005]),
                     SpatieMediaLibraryFileUpload::make('logo')
                         ->collection('Logo')
                         ->label('Logo')
@@ -180,6 +166,25 @@ class WholesaverVendorServiceProvider extends ServiceProvider
                         ->image()
                         ->placeholder('Upload a background image for the vendor'),
                 ]);
+        });
+
+        EditVendorProfile::macro('saveProfileUpdatedData', function (Model $record, array $data) {
+            $meta = [
+                'delivery_days' => $data['delivery_days'],
+                'postcodes' => $data['postcodes'],
+            ];
+            unset($data['delivery_days']);
+            unset($data['postcodes']);
+
+            $data['meta'] = $meta;
+            $this->tenant->update($data);
+            return $this->tenant;
+        });
+
+        EditVendorProfile::macro('mutateVendorProfileDataBeforeEditFormFieldFill', function (array $data) {
+            $data['delivery_days'] = $data['meta']['delivery_days'] ?? [];
+            $data['postcodes'] = $data['meta']['postcodes'] ?? [];
+            return $data;
         });
     }
 }
