@@ -69,4 +69,8 @@ class User extends Authenticatable implements FilamentUser, HasTenants, CanReset
         return true;
     }
 
+    public function sCMVVendors(){
+        return $this->belongsToMany(SCMVVendor::class, 'sc_mv_user_vendor', 'user_id', 'vendor_id');
+    }
+
 }
