@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a9579ff66484b9556c8a70b77a31345a",
+    "content-hash": "d603d0de205af0e9961937cfcfa7d930",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -5155,7 +5155,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/sparkcommerce",
-                "reference": "1e0f4a0e1b633ad5aa20f018af1e3c6b0cd1bc25"
+                "reference": "b15409a67f00a056c3cf3e48d20797bf4424ac57"
             },
             "require": {
                 "binafy/laravel-cart": "^1.0",
@@ -5251,7 +5251,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/sparkcommerce-multivendor",
-                "reference": "2a793860475ea071e5b4912c0a4d71815f0003f2"
+                "reference": "18d733375967b4165fe906b72dd0352ae4e5614b"
             },
             "require": {
                 "binafy/laravel-cart": "^1.0",
@@ -5349,7 +5349,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/sparkcommerce-multivendor-rest-routes",
-                "reference": "cd84bfc274e7816423e7a92b4a3bdf02fd97477c"
+                "reference": "9a80ad9e5cc4971eba981ea5f1ce3fdf54177380"
             },
             "require": {
                 "binafy/laravel-cart": "^1.0",
@@ -5456,7 +5456,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/sparkcommerce-rest-routes",
-                "reference": "35dbbd8cce9576d33c59630cd318a1c7e75f61e5"
+                "reference": "0a8ad923aea106314e6708c9fcb195a1673e52ca"
             },
             "require": {
                 "binafy/laravel-cart": "^1.0",

@@ -21,6 +21,7 @@ use Rahat1994\SparkcommerceMultivendor\Filament\Resources\VendorRequestResource;
 use Rahat1994\SparkcommerceMultivendor\Filament\Resources\VendorResource;
 use Rahat1994\SparkcommerceMultivendor\Models\SCMVVendor;
 use Illuminate\Database\Eloquent\Model;
+
 class WholesaverVendorServiceProvider extends ServiceProvider
 {
     /**
@@ -79,6 +80,16 @@ class WholesaverVendorServiceProvider extends ServiceProvider
                         ->label('Postcodes')
                         ->required()
                         ->placeholder('Postcodes where the vendor delivers'),
+                    Select::make('vendor_currency')
+                        ->label('Vendor Currency')
+                        ->options([
+                            'GBP' => 'Great Britain Pound',
+                            'USD' => 'United States Dollar',
+                            'EUR' => 'Euro',
+                            'AED' => 'United Arab Emirates Dirham',
+                            'AUD' => 'Australian Dollar',
+                            'BDT' => 'Bangladeshi Taka',
+                        ]),
                     SpatieMediaLibraryFileUpload::make('logo')
                         ->collection('Logo')
                         ->label('Logo')
@@ -100,9 +111,11 @@ class WholesaverVendorServiceProvider extends ServiceProvider
             $meta = [
                 'delivery_days' => $data['delivery_days'],
                 'postcodes' => $data['postcodes'],
+                'vendor_currency' => $data['vendor_currency'],
             ];
             unset($data['delivery_days']);
             unset($data['postcodes']);
+            unset($data['vendor_currency']);
 
             $data['meta'] = $meta;
             $vendor = SCMVVendor::create($data);
@@ -141,18 +154,28 @@ class WholesaverVendorServiceProvider extends ServiceProvider
                         ->multiple()
                         ->options([
                             'Saturday' => 'Saturday',
-                            'Sunday'=>'Sunday',
-                            'Monday'=>'Monday',
-                            'Tuesday'=>'Tuesday',
-                            'Wednesday'=>'Wednesday',
-                            'Thursday'=>'Thursday',
-                            'Friday'=>'Friday',
+                            'Sunday' => 'Sunday',
+                            'Monday' => 'Monday',
+                            'Tuesday' => 'Tuesday',
+                            'Wednesday' => 'Wednesday',
+                            'Thursday' => 'Thursday',
+                            'Friday' => 'Friday',
                         ]),
                     TagsInput::make('postcodes')
                         ->label('Postcodes')
                         ->required()
                         ->placeholder('Postcodes where the vendor delivers')
                         ->default([31000, 2005]),
+                    Select::make('vendor_currency')
+                        ->label('Vendor Currency')
+                        ->options([
+                            'GBP' => 'Great Britain Pound',
+                            'USD' => 'United States Dollar',
+                            'EUR' => 'Euro',
+                            'AED' => 'United Arab Emirates Dirham',
+                            'AUD' => 'Australian Dollar',
+                            'BDT' => 'Bangladeshi Taka',
+                        ]),
                     SpatieMediaLibraryFileUpload::make('logo')
                         ->collection('Logo')
                         ->label('Logo')
@@ -172,9 +195,11 @@ class WholesaverVendorServiceProvider extends ServiceProvider
             $meta = [
                 'delivery_days' => $data['delivery_days'],
                 'postcodes' => $data['postcodes'],
+                'vendor_currency' => $data['vendor_currency'],
             ];
             unset($data['delivery_days']);
             unset($data['postcodes']);
+            unset($data['vendor_currency']);
 
             $data['meta'] = $meta;
             $this->tenant->update($data);
