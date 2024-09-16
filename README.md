@@ -4,16 +4,16 @@
 
 This project completely relies on 4 packages
 
-1. sparkcommerce.
+1. [sparkcommerce](https://github.com/rahat1994/sparkCommerce).
    
     This is the core of the project and every-other packages extends on its functinalities. It only has basic shop setup functionality with authentication.
-2. sparkcommerce-multivendor
+2. [sparkcommerce-multivendor](https://github.com/rahat1994/sparkCommerce-multivendor)
 
     This package adds multivendor capabilities to the sparkcommerce package.
-3. sparkcommerce-rest-routes
+3. [sparkcommerce-rest-routes](https://github.com/rahat1994/sparkCommerce-rest-routes)
 
     Not every application needs REST api capabilities but those who does this package adds restapi capbilities to sparkcommerce package. Available rest routes are mentioned later in this page.
-4. sparkcommerce-multivendor-rest-routes
+4. [sparkcommerce-multivendor-rest-routes](https://github.com/rahat1994/sparkCommerce-rest-routes)
 
     It extends on the 3rd package and adds its own rest routes.
 
@@ -64,8 +64,9 @@ This project completely relies on 4 packages
 
 ### REST APIS available
 
-Here’s a list of all the endpoints along with the required parameters from the provided Postman collection in GitHub markdown format:
+Here’s a list of all the endpoints along with the required parameters.
 
+`base_url` is the url of the application.
 
 # API Endpoints
 
