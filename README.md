@@ -13,7 +13,7 @@ This project completely relies on 4 packages
 3. [sparkcommerce-rest-routes](https://github.com/rahat1994/sparkCommerce-rest-routes)
 
     Not every application needs REST api capabilities but those who does this package adds restapi capbilities to sparkcommerce package. Available rest routes are mentioned later in this page.
-4. [sparkcommerce-multivendor-rest-routes](https://github.com/rahat1994/sparkCommerce-rest-routes)
+4. [sparkcommerce-multivendor-rest-routes](https://github.com/rahat1994/sparkCommerce-multivendor-rest-routes)
 
     It extends on the 3rd package and adds its own rest routes.
 
