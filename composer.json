@@ -75,20 +75,20 @@
     },
     "repositories": {
         "sparkcommerce": {
-            "type": "path",
-            "url": "./packages/sparkcommerce"
+            "type": "vcs",
+            "url": "https://github.com/rahat1994/sparkcommerce"
         },
         "sparkcommerce-multivendor": {
-            "type": "path",
-            "url": "./packages/sparkcommerce-multivendor"
+            "type": "vcs",
+            "url": "https://github.com/rahat1994/sparkcommerce-multivendor"
         },
         "sparkcommerce-multivendor-rest-routes": {
-            "type": "path",
-            "url": "./packages/sparkcommerce-multivendor-rest-routes"
+            "type": "vcs",
+            "url": "https://github.com/rahat1994/sparkcommerce-multivendor-rest-routes"
         },
         "sparkcommerce-rest-routes": {
-            "type": "path",
-            "url": "./packages/sparkcommerce-rest-routes"
+            "type": "vcs",
+            "url": "https://github.com/rahat1994/sparkcommerce-rest-routes"
         }
     },
     "minimum-stability": "dev",
