@@ -66,7 +66,7 @@ This project completely relies on 4 packages
 
 Here’s a list of all the endpoints along with the required parameters from the provided Postman collection in GitHub markdown format:
 
-```markdown
+
 # API Endpoints
 
 ## Auth
@@ -357,6 +357,4 @@ Here’s a list of all the endpoints along with the required parameters from the
 ### 35. Single Order
 **Method:** `GET`  
 **URL:** `{{base_url}}/scmv/v1/orders/IboDycFlGI`
-```
 
-This markdown is now formatted to be used in GitHub for easy documentation.
