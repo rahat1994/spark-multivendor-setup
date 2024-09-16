@@ -1,10 +1,11 @@
 {
-    "name": "laravel/laravel",
+    "name": "rahat1994/sparkmultivendor",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Multivendor Setup",
     "keywords": [
         "laravel",
-        "framework"
+        "framework",
+        "sparkcommerce"
     ],
     "license": "MIT",
     "require": {

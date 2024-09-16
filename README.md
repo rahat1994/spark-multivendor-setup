@@ -1,22 +1,20 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
+# Spark Multivendor
 ## About this project
 
-This project completely relies on 4 packages
+This project completely relies on 4 inhouse packages
 
 1. [sparkcommerce](https://github.com/rahat1994/sparkCommerce).
    
-    This is the core of the project and every-other packages extends on its functinalities. It only has basic shop setup functionality with authentication.
+    This is the core of the project, and all other packages build upon its functionality. It provides basic shop setup features with authentication.
 2. [sparkcommerce-multivendor](https://github.com/rahat1994/sparkCommerce-multivendor)
 
     This package adds multivendor capabilities to the sparkcommerce package.
 3. [sparkcommerce-rest-routes](https://github.com/rahat1994/sparkCommerce-rest-routes)
 
-    Not every application needs REST api capabilities but those who does this package adds restapi capbilities to sparkcommerce package. Available rest routes are mentioned later in this page.
+    Not every application requires REST API capabilities, but for those that do, this package adds REST API functionality to the SparkCommerce package. The available REST routes are detailed later on this page
 4. [sparkcommerce-multivendor-rest-routes](https://github.com/rahat1994/sparkCommerce-multivendor-rest-routes)
 
     It extends on the 3rd package and adds its own rest routes.
-
 
 ## Setup Process
 1. `git clone`
@@ -33,6 +31,11 @@ This project completely relies on 4 packages
 9. serve the app using `php artisan serve`
 10. for vendor dashboard visit http://127.0.0.1:8000/vendor/login
 11. for admin dashboard visit http://127.0.0.1:8000/backoffice/login
+
+### Find the coding implementation of the packages
+
+* [sparkcommerce-rest-routes\src\Http\Controllers\](https://github.com/rahat1994/sparkcommerce-rest-routes/tree/main/src/Http/Controllers)
+* [sparkcommerce-multivendor-rest-routes\src\Http\Controllers\](https://github.com/rahat1994/sparkcommerce-multivendor-rest-routes/tree/main/src/Http/Controllers)
 
 ## Features
 
@@ -61,6 +64,7 @@ This project completely relies on 4 packages
 - [ ] Payout Request
 - [ ] Deactivating vendor
 - [ ] Conflict resolution
+- [ ] Platform Commision
 
 ### REST APIS available
 
