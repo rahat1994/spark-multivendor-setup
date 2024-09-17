@@ -5157,12 +5157,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rahat1994/sparkCommerce.git",
-                "reference": "2aa4b9091130a7e6ba5952c48a1896de642d16a7"
+                "reference": "ad0a5ed886e0e0a0d22bc0ed2392357b8be29861"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rahat1994/sparkCommerce/zipball/2aa4b9091130a7e6ba5952c48a1896de642d16a7",
-                "reference": "2aa4b9091130a7e6ba5952c48a1896de642d16a7",
+                "url": "https://api.github.com/repos/rahat1994/sparkCommerce/zipball/ad0a5ed886e0e0a0d22bc0ed2392357b8be29861",
+                "reference": "ad0a5ed886e0e0a0d22bc0ed2392357b8be29861",
                 "shasum": ""
             },
             "require": {
@@ -5256,7 +5256,7 @@
                     "url": "https://github.com/rahat1994"
                 }
             ],
-            "time": "2024-09-15T17:38:33+00:00"
+            "time": "2024-09-16T18:45:35+00:00"
         },
         {
             "name": "rahat1994/sparkcommerce-multivendor",
